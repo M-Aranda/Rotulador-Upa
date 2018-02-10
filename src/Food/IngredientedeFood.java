@@ -8,6 +8,11 @@ public class IngredientedeFood extends FormatoRotulo {
         super(nombre, fechaDeElaboracion, horaDeElaboracion, fechaDeVencimiento, responsable);
     }
 
+    public IngredientedeFood() {
+    }
+    
+    
+
     @Override
     public void setResponsable(String responsable) {
         super.setResponsable(responsable); //To change body of generated methods, choose Tools | Templates.
@@ -64,7 +69,7 @@ public class IngredientedeFood extends FormatoRotulo {
                 "\nFecha de elaboracion: "+getFechaDeElaboracion()+"  "+
                 "\nHora de elaboracion: "+getHoraDeElaboracion()+"  "+
                 "\nFecha de vencimiento: "+getFechaDeVencimiento()+"  "+
-                "\nResponsable :"+getResponsable();
+                "\nResponsable: "+getResponsable();
                 
     }
 
