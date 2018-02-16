@@ -1,9 +1,15 @@
 package rotulador.upa;
 
 import Food.IngredientedeFood;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class RotuladorUPA {
 
@@ -30,22 +36,20 @@ public class RotuladorUPA {
 
                     List<IngredientedeFood> ingredientesF = new ArrayList();
 
-                    System.out.print("Ingrese fecha de elaboracion: ");
-                    String fE = s.nextLine();
-
+//                    System.out.print("Ingrese fecha de elaboracion: ");
+//                    String fE = s.nextLine();
                     int hEN;
                     while (true) {
 
                         try {
                             System.out.print("Ingrese hora de elaboracion: ");
                             hEN = Integer.parseInt(s.nextLine());
-                            
-                            if(hEN<=2359 && hEN>=0000){
-                            break;
-                        }else{
+
+                            if (hEN <= 2359 && hEN >= 0000) {
+                                break;
+                            } else {
                                 System.out.println("El numero debe ser igual or mayor que 0000 y menor a 2400");
                             }
-                            
 
                         } catch (Exception e) {
                             System.out.println("Eso no es valido(Ingrese numero entero de 4 digitos, ej: la una de la madrugada"
@@ -56,6 +60,12 @@ public class RotuladorUPA {
                     System.out.print("Ingrese responsable de elaboracion: ");
                     String res = s.nextLine();
                     System.out.println("");
+
+                    DateTimeFormatter hoy = DateTimeFormatter.ofPattern("dd/MM/yyyy ");//HH:mm:ss Esto adentro del parentesis agrega la hora
+                    LocalDateTime ahora = LocalDateTime.now();
+//                    System.out.println(hoy.format(ahora));
+
+                    String fE = hoy.format(ahora);
 
                     while (true) {
                         IngredientedeFood ing = new IngredientedeFood();
@@ -76,6 +86,14 @@ public class RotuladorUPA {
                         }
 
                         ing.setHoraDeElaboracion(hEF.toString());
+
+                        Calendar calendar = Calendar.getInstance();//Crea nuevo calendario?
+//                        System.out.println(calendar.getTime()); print today's date
+                        calendar.add(Calendar.DATE, 2);//agrega 2 dia a esa fecha del calendario
+                        Date ddd = calendar.getTime();//guarda datos en variable
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy ");//se usa para darle formato String a la fecha
+                        String fVM = df.format(ddd);//pasa la fecha a String
+                        ing.setFechaDeVencimiento(fVM);//le da la fecha nueva como String para el metodo que la setea
 
                         ing.setResponsable(res);
                         ingredientesF.add(ing);
@@ -114,6 +132,8 @@ public class RotuladorUPA {
                     for (IngredientedeFood ingredientedeFood : ingredientesF) {
                         System.out.println("\n" + ingredientedeFood);
                     }
+
+                    System.out.println("");
 
                 } else if (op == 2) {
                     System.out.println("Crea rotulo de cafe (No disponible)");

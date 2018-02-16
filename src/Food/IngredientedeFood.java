@@ -1,5 +1,6 @@
 package Food;
 
+
 import rotulador.upa.FormatoRotulo;
 
 public class IngredientedeFood extends FormatoRotulo {
@@ -63,6 +64,10 @@ public class IngredientedeFood extends FormatoRotulo {
         return super.getNombre(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    
+    
+    
     @Override
     public String toString() {
         return "Nombre: "+getNombre()+"  "+
