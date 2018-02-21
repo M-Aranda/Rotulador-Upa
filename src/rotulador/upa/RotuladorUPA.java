@@ -98,6 +98,7 @@ public class RotuladorUPA {
 
                     String fE = hoy.format(ahora);
 
+                    int minutosaAgregar=5;
                     while (true) {
                         IngredientedeFood ing = new IngredientedeFood();
                         ing.setFechaDeElaboracion(fE);
@@ -127,26 +128,17 @@ public class RotuladorUPA {
                         String fVM = df.format(ddd);//pasa la fecha a String
                         ing.setFechaDeVencimiento(fVM);//le da la fecha nueva como String para el metodo que la setea
 
-                        
-                        
-                        Calendar cale = Calendar.getInstance();
-                        Date hor = cale.getTime();
-                        int minutosAAgregar = 5;
-                        if (ele == 1) {
-                            for (int i = 0; i < 21; i++) {
-                                
-                                cale.add(Calendar.MINUTE, minutosAAgregar);
-
-                                DateFormat formatoTiempo = new SimpleDateFormat("HH:mm:ss");
-                                String horaEla = formatoTiempo.format(hor);
-                                ing.setHoraDeElaboracion(horaEla);
-                                minutosAAgregar += 5;
-                            }
-
-                        }
-
                         ing.setResponsable(res);
                         ingredientesF.add(ing);
+
+                        Calendar cale = Calendar.getInstance();
+                        DateFormat formatoTiempo = new SimpleDateFormat("HH:mm");
+
+                        cale.add(Calendar.MINUTE, minutosaAgregar);
+                            String horaModificada = formatoTiempo.format(cale.getTime());
+                            ing.setHoraDeElaboracion(horaModificada);
+
+                            minutosaAgregar += 5;
 
                         hEN += 5;
 
@@ -156,10 +148,34 @@ public class RotuladorUPA {
                         }
 
                     }
+
+                    Calendar cale = Calendar.getInstance();
+                    DateFormat formatoTiempo = new SimpleDateFormat("HH:mm");
+//
+//                    int minutosAAgregar = 5;
+//                    if (ele == 1) {
+//                        for (int i = 0; i < 21; i++) {
+//
+//                            cale.add(Calendar.MINUTE, minutosAAgregar);
+//                            String horaModificada = formatoTiempo.format(cale.getTime());
+//
+//                            minutosAAgregar += 5;
+//                            ingredientesF.get(i-1).setHoraDeElaboracion(horaModificada);
+//                        }
+//
+//                    }
+
                     Calendar horaPrimerIngre = Calendar.getInstance();
                     Date horaTomate = horaPrimerIngre.getTime();
-                    DateFormat formatoTomate = new SimpleDateFormat("HH:mm:ss");
+                    DateFormat formatoTomate = new SimpleDateFormat("HH:mm");
                     String horaTom = formatoTomate.format(horaTomate);
+
+                    Calendar cUnDia = Calendar.getInstance();
+                    cUnDia.add(Calendar.DATE, 1);
+                    Date dfvT = cUnDia.getTime();
+                    DateFormat dfT = new SimpleDateFormat("dd/MM/yyyy ");
+                    String fvmT = dfT.format(dfvT);
+                    ingredientesF.get(0).setFechaDeVencimiento(fvmT);
 
                     ingredientesF.get(0).setNombre("Tomate");
                     ingredientesF.get(0).setHoraDeElaboracion(horaTom);
@@ -167,6 +183,7 @@ public class RotuladorUPA {
                     ingredientesF.get(2).setNombre("Queso");
                     ingredientesF.get(3).setNombre("Queso");
                     ingredientesF.get(4).setNombre("Mechada");
+                    ingredientesF.get(5).setFechaDeVencimiento(fvmT);
                     ingredientesF.get(5).setNombre("Palta");
                     ingredientesF.get(6).setNombre("Pollo");
                     ingredientesF.get(7).setNombre("Lomito");
@@ -177,11 +194,13 @@ public class RotuladorUPA {
                     ingredientesF.get(12).setNombre("Pepperoni");
                     ingredientesF.get(13).setNombre("Pimenton");
                     ingredientesF.get(14).setNombre("Champignon");
+                    ingredientesF.get(15).setFechaDeVencimiento(fvmT);
                     ingredientesF.get(15).setNombre("Quesillo");
                     ingredientesF.get(16).setNombre("Cheddar");
                     ingredientesF.get(17).setNombre("Mix del Chef");
                     ingredientesF.get(18).setNombre("Mix Capriccosa");
                     ingredientesF.get(19).setNombre("Aceituna");
+                    ingredientesF.get(20).setFechaDeVencimiento(fvmT);
                     ingredientesF.get(20).setNombre("Lechuga");
 
                     for (IngredientedeFood ingredientedeFood : ingredientesF) {
