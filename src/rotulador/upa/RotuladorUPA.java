@@ -8,7 +8,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime; //Me falta probar esto para modificar la hora
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -98,7 +97,7 @@ public class RotuladorUPA {
 
                     String fE = hoy.format(ahora);
 
-                    int minutosaAgregar=5;
+                    int minutosaAgregar = 5;
                     while (true) {
                         IngredientedeFood ing = new IngredientedeFood();
                         ing.setFechaDeElaboracion(fE);
@@ -135,10 +134,10 @@ public class RotuladorUPA {
                         DateFormat formatoTiempo = new SimpleDateFormat("HH:mm");
 
                         cale.add(Calendar.MINUTE, minutosaAgregar);
-                            String horaModificada = formatoTiempo.format(cale.getTime());
-                            ing.setHoraDeElaboracion(horaModificada);
+                        String horaModificada = formatoTiempo.format(cale.getTime());
+                        ing.setHoraDeElaboracion(horaModificada);
 
-                            minutosaAgregar += 5;
+                        minutosaAgregar += 5;
 
                         hEN += 5;
 
@@ -210,7 +209,63 @@ public class RotuladorUPA {
                     System.out.println("");
 
                 } else if (op == 2) {
-                    System.out.println("Crea rotulo de cafe (No disponible)");
+                    System.out.println("Crear rotulos de cafe (Isla)");
+
+                    System.out.print("Ingrese nombre de responsable de Cafe: ");
+
+                    String resCafe = s.nextLine();
+
+                    List<IngredientedeFood> ingredientesC = new ArrayList();
+
+                    Calendar cDosDiaCafe = Calendar.getInstance();
+                    cDosDiaCafe.add(Calendar.DATE, 2);
+                    Date dfvT = cDosDiaCafe.getTime();
+                    DateFormat dfT = new SimpleDateFormat("dd/MM/yyyy ");
+                    String fvdosDiaCafe = dfT.format(dfvT);
+                    
+                    Calendar cUnDiaCafe= Calendar.getInstance();
+                    cUnDiaCafe.add(Calendar.DATE,1);
+                    Date dfvCafeAlterada=cUnDiaCafe.getTime();
+                    String stringDfvCafeAlterada=dfT.format(dfvCafeAlterada);
+                    
+
+                    for (int i = 0; i < 8; i++) {
+                        IngredientedeFood ingC = new IngredientedeFood();
+                        ingredientesC.add(ingC);
+                        
+
+                    }
+
+                    ingredientesC.get(0).setNombre("Palta");
+                    ingredientesC.get(1).setNombre("Ketchup");
+                    ingredientesC.get(2).setNombre("Mostaza");
+                    ingredientesC.get(3).setNombre("Mayonesa");
+                    ingredientesC.get(4).setNombre("Tomate");
+                    ingredientesC.get(5).setNombre("Chucrut");
+                    ingredientesC.get(6).setNombre("Pepinillo");
+                    ingredientesC.get(7).setNombre("Americana");
+
+                    DateTimeFormatter hoyDiaCafe = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDateTime ahoraCafe = LocalDateTime.now();
+                    String fEC = hoyDiaCafe.format(ahoraCafe);
+                    
+                    
+
+                    for (IngredientedeFood ingredientedeFood : ingredientesC) {
+                        ingredientedeFood.setResponsable(resCafe);
+                        ingredientedeFood.setFechaDeElaboracion(fEC);
+                        ingredientedeFood.setFechaDeVencimiento(fvdosDiaCafe);
+                    }
+                    
+                    ingredientesC.get(0).setFechaDeVencimiento(stringDfvCafeAlterada);
+                    ingredientesC.get(4).setFechaDeVencimiento(stringDfvCafeAlterada);
+                    
+                    
+
+                    for (IngredientedeFood ingredientedeFood : ingredientesC) {
+                        System.out.println("\n" + ingredientedeFood);
+                    }
+
                 } else if (op == 3) {
                     System.out.println("Crea rotulo de ave palta y/o ave pimenton (No disponible)");
                 } else if (op < 1 || op > 4) {

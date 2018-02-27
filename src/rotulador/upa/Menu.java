@@ -10,7 +10,7 @@ public class Menu {
     
     
     public void mostrarMenuDeInicio(){
-        
+        System.out.println("\n                  ");
         System.out.println("Elija opcion:");
         
         System.out.println("1. Crear rotulos para food");
