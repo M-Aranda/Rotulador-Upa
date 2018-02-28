@@ -222,17 +222,15 @@ public class RotuladorUPA {
                     Date dfvT = cDosDiaCafe.getTime();
                     DateFormat dfT = new SimpleDateFormat("dd/MM/yyyy ");
                     String fvdosDiaCafe = dfT.format(dfvT);
-                    
-                    Calendar cUnDiaCafe= Calendar.getInstance();
-                    cUnDiaCafe.add(Calendar.DATE,1);
-                    Date dfvCafeAlterada=cUnDiaCafe.getTime();
-                    String stringDfvCafeAlterada=dfT.format(dfvCafeAlterada);
-                    
+
+                    Calendar cUnDiaCafe = Calendar.getInstance();
+                    cUnDiaCafe.add(Calendar.DATE, 1);
+                    Date dfvCafeAlterada = cUnDiaCafe.getTime();
+                    String stringDfvCafeAlterada = dfT.format(dfvCafeAlterada);
 
                     for (int i = 0; i < 8; i++) {
                         IngredientedeFood ingC = new IngredientedeFood();
                         ingredientesC.add(ingC);
-                        
 
                     }
 
@@ -248,26 +246,94 @@ public class RotuladorUPA {
                     DateTimeFormatter hoyDiaCafe = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDateTime ahoraCafe = LocalDateTime.now();
                     String fEC = hoyDiaCafe.format(ahoraCafe);
-                    
-                    
 
                     for (IngredientedeFood ingredientedeFood : ingredientesC) {
                         ingredientedeFood.setResponsable(resCafe);
                         ingredientedeFood.setFechaDeElaboracion(fEC);
                         ingredientedeFood.setFechaDeVencimiento(fvdosDiaCafe);
                     }
-                    
+
                     ingredientesC.get(0).setFechaDeVencimiento(stringDfvCafeAlterada);
                     ingredientesC.get(4).setFechaDeVencimiento(stringDfvCafeAlterada);
-                    
-                    
 
                     for (IngredientedeFood ingredientedeFood : ingredientesC) {
                         System.out.println("\n" + ingredientedeFood);
                     }
 
                 } else if (op == 3) {
-                    System.out.println("Crea rotulo de ave palta y/o ave pimenton (No disponible)");
+                    System.out.println("Crea rotulos de ave palta o ave pimenton?");
+
+                    int eleccionSand = 0;
+
+                    while (true) {
+                        try {
+                            System.out.println("1. Ave Palta");
+                            System.out.println("2. Ave Pimenton");
+                            eleccionSand = s.nextInt();
+                            if (eleccionSand == 1 || eleccionSand == 2) {
+                                break;
+                            } else if (eleccionSand != 1 && eleccionSand != 2) {
+                                System.out.println("Debe seleccionar 1 o 2");
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("Eso no es valido");
+                        }
+                    }
+
+                    int cantAPal = 0;
+                    int cantAPim = 0;
+
+                    while (true) {
+                        try {
+                            System.out.print("\n Cauntos ave palta?");
+                            cantAPal = Integer.parseInt(s.nextLine());
+                            System.out.print("\n Cuantos ave pimenton?");
+                            cantAPim = Integer.parseInt(s.nextLine());
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Debe seleccionar un numero entero");
+                        }
+                    }
+
+                    System.out.println("Quien es el responsable de los ave palta?");
+                    String resAvPal = s.nextLine();
+                    System.out.println("Quien es el responsable de los ave pimenton?");
+                    String resAvPim = s.nextLine();
+
+                    List<IngredientedeFood> rotulosApalta = new ArrayList();
+                    List<IngredientedeFood> rotulosApimenton = new ArrayList();
+
+                    Calendar calendarioAP = Calendar.getInstance();
+                    
+                    
+                    
+                                        
+                    DateFormat formatoHora = new SimpleDateFormat("HH:mm");
+                    String horaEla = formatoHora.format(calendarioAP.getTime());
+                    
+
+                    
+                    calendarioAP.add(Calendar.DATE, 2);
+                    Date fechaAves = calendarioAP.getTime();
+                    DateFormat formatoAves = new SimpleDateFormat("dd/MM/yyyy");
+                    String fVAves = formatoAves.format(fechaAves);
+                    
+                    calendarioAP.add(Calendar.DATE, -2);
+                    String fEAves=formatoAves.format(fechaAves);
+
+
+                    for (int i = 0; i < cantAPal; i++) {
+                        IngredientedeFood AvePalta = new IngredientedeFood();
+                        AvePalta.setNombre("Ave Palta");
+                        AvePalta.setFechaDeElaboracion(fEAves);
+                        AvePalta.setHoraDeElaboracion(horaEla);
+                        AvePalta.setFechaDeVencimiento(fVAves);
+                        AvePalta.setResponsable(resAvPal);
+
+                        rotulosApalta.add(AvePalta);
+                    }
+
                 } else if (op < 1 || op > 4) {
                     System.out.println("Debe elegir uno de los numeros del menu");
                 }
