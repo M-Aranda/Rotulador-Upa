@@ -18,7 +18,6 @@ public abstract class FormatoRotulo {
 
     public FormatoRotulo() {
     }
-;
 
     public String getNombre() {
         return nombre;
@@ -59,14 +58,5 @@ public abstract class FormatoRotulo {
     public void setResponsable(String responsable) {
         this.responsable = responsable;
     }
-
-
-    
-    
-    
-
-    
-    
-    
 
 }

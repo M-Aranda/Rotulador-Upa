@@ -1,6 +1,6 @@
 package rotulador.upa;
 
-import Food.IngredientedeFood;
+import Food.IngredienteOProducto;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +35,7 @@ public class RotuladorUPA {
 
                     int cant_ing = 0;
 
-                    List<IngredientedeFood> ingredientesF = new ArrayList();
+                    List<IngredienteOProducto> ingredientesF = new ArrayList();
 
 //                    System.out.print("Ingrese fecha de elaboracion: ");
 //                    String fE = s.nextLine();
@@ -99,7 +99,7 @@ public class RotuladorUPA {
 
                     int minutosaAgregar = 5;
                     while (true) {
-                        IngredientedeFood ing = new IngredientedeFood();
+                        IngredienteOProducto ing = new IngredienteOProducto();
                         ing.setFechaDeElaboracion(fE);
 //
 //                        String hEpf = Integer.toString(hEN);
@@ -202,11 +202,12 @@ public class RotuladorUPA {
                     ingredientesF.get(20).setFechaDeVencimiento(fvmT);
                     ingredientesF.get(20).setNombre("Lechuga");
 
-                    for (IngredientedeFood ingredientedeFood : ingredientesF) {
+                    for (IngredienteOProducto ingredientedeFood : ingredientesF) {
                         System.out.println("\n" + ingredientedeFood);
                     }
 
                     System.out.println("");
+                    ingredientesF.clear();
 
                 } else if (op == 2) {
                     System.out.println("Crear rotulos de cafe (Isla)");
@@ -215,7 +216,7 @@ public class RotuladorUPA {
 
                     String resCafe = s.nextLine();
 
-                    List<IngredientedeFood> ingredientesC = new ArrayList();
+                    List<IngredienteOProducto> ingredientesC = new ArrayList();
 
                     Calendar cDosDiaCafe = Calendar.getInstance();
                     cDosDiaCafe.add(Calendar.DATE, 2);
@@ -229,7 +230,7 @@ public class RotuladorUPA {
                     String stringDfvCafeAlterada = dfT.format(dfvCafeAlterada);
 
                     for (int i = 0; i < 8; i++) {
-                        IngredientedeFood ingC = new IngredientedeFood();
+                        IngredienteOProducto ingC = new IngredienteOProducto();
                         ingredientesC.add(ingC);
 
                     }
@@ -247,48 +248,39 @@ public class RotuladorUPA {
                     LocalDateTime ahoraCafe = LocalDateTime.now();
                     String fEC = hoyDiaCafe.format(ahoraCafe);
 
-                    for (IngredientedeFood ingredientedeFood : ingredientesC) {
+                    Calendar muestraHoraIsla = Calendar.getInstance();
+                    DateFormat formatoTiempoIsla = new SimpleDateFormat("HH:mm");
+
+                    for (IngredienteOProducto ingredientedeFood : ingredientesC) {
+                        muestraHoraIsla.add(Calendar.MINUTE, 5);
+                        String horaModificadaIsla = formatoTiempoIsla.format(muestraHoraIsla.getTime());
                         ingredientedeFood.setResponsable(resCafe);
                         ingredientedeFood.setFechaDeElaboracion(fEC);
                         ingredientedeFood.setFechaDeVencimiento(fvdosDiaCafe);
+                        ingredientedeFood.setHoraDeElaboracion(horaModificadaIsla);
+
                     }
 
                     ingredientesC.get(0).setFechaDeVencimiento(stringDfvCafeAlterada);
                     ingredientesC.get(4).setFechaDeVencimiento(stringDfvCafeAlterada);
 
-                    for (IngredientedeFood ingredientedeFood : ingredientesC) {
+                    for (IngredienteOProducto ingredientedeFood : ingredientesC) {
                         System.out.println("\n" + ingredientedeFood);
                     }
 
+                    ingredientesC.clear();
+
                 } else if (op == 3) {
-                    System.out.println("Crea rotulos de ave palta o ave pimenton?");
-
-                    int eleccionSand = 0;
-
-                    while (true) {
-                        try {
-                            System.out.println("1. Ave Palta");
-                            System.out.println("2. Ave Pimenton");
-                            eleccionSand = s.nextInt();
-                            if (eleccionSand == 1 || eleccionSand == 2) {
-                                break;
-                            } else if (eleccionSand != 1 && eleccionSand != 2) {
-                                System.out.println("Debe seleccionar 1 o 2");
-                            }
-
-                        } catch (Exception e) {
-                            System.out.println("Eso no es valido");
-                        }
-                    }
+                    System.out.println("Crea rotulos de ave palta y ave pimenton");
 
                     int cantAPal = 0;
                     int cantAPim = 0;
 
                     while (true) {
                         try {
-                            System.out.print("\n Cauntos ave palta?");
+                            System.out.print("\nCuantos ave palta? ");
                             cantAPal = Integer.parseInt(s.nextLine());
-                            System.out.print("\n Cuantos ave pimenton?");
+                            System.out.print("\nCuantos ave pimenton? ");
                             cantAPim = Integer.parseInt(s.nextLine());
                             break;
                         } catch (Exception e) {
@@ -296,35 +288,31 @@ public class RotuladorUPA {
                         }
                     }
 
-                    System.out.println("Quien es el responsable de los ave palta?");
+                    System.out.print("\nQuien es el responsable de los ave palta? ");
                     String resAvPal = s.nextLine();
-                    System.out.println("Quien es el responsable de los ave pimenton?");
+                    System.out.print("\nQuien es el responsable de los ave pimenton? ");
                     String resAvPim = s.nextLine();
 
-                    List<IngredientedeFood> rotulosApalta = new ArrayList();
-                    List<IngredientedeFood> rotulosApimenton = new ArrayList();
+                    List<IngredienteOProducto> rotulosApalta = new ArrayList();
+                    List<IngredienteOProducto> rotulosApimenton = new ArrayList();
 
                     Calendar calendarioAP = Calendar.getInstance();
-                    
-                    
-                    
-                                        
+
                     DateFormat formatoHora = new SimpleDateFormat("HH:mm");
                     String horaEla = formatoHora.format(calendarioAP.getTime());
-                    
 
-                    
+                    Date feEAV = calendarioAP.getTime();
+
                     calendarioAP.add(Calendar.DATE, 2);
                     Date fechaAves = calendarioAP.getTime();
                     DateFormat formatoAves = new SimpleDateFormat("dd/MM/yyyy");
                     String fVAves = formatoAves.format(fechaAves);
-                    
-                    calendarioAP.add(Calendar.DATE, -2);
-                    String fEAves=formatoAves.format(fechaAves);
 
+//                    calendarioAP.add(Calendar.DATE, -2);
+                    String fEAves = formatoAves.format(feEAV);
 
                     for (int i = 0; i < cantAPal; i++) {
-                        IngredientedeFood AvePalta = new IngredientedeFood();
+                        IngredienteOProducto AvePalta = new IngredienteOProducto();
                         AvePalta.setNombre("Ave Palta");
                         AvePalta.setFechaDeElaboracion(fEAves);
                         AvePalta.setHoraDeElaboracion(horaEla);
@@ -333,6 +321,31 @@ public class RotuladorUPA {
 
                         rotulosApalta.add(AvePalta);
                     }
+
+                    for (int i = 0; i < cantAPim; i++) {
+                        IngredienteOProducto AvePimenton = new IngredienteOProducto();
+                        AvePimenton.setNombre("Ave Pimenton");
+                        AvePimenton.setFechaDeElaboracion(fEAves);
+                        AvePimenton.setHoraDeElaboracion(horaEla);
+                        AvePimenton.setFechaDeVencimiento(fVAves);
+                        AvePimenton.setResponsable(resAvPim);
+
+                        rotulosApimenton.add(AvePimenton);
+
+                    }
+
+                    for (IngredienteOProducto ingredientedeFood : rotulosApalta) {
+                        System.out.println("\n" + ingredientedeFood);
+
+                    }
+
+                    for (IngredienteOProducto ingredientedeFood : rotulosApimenton) {
+                        System.out.println("\n" + ingredientedeFood);
+
+                    }
+
+                    rotulosApalta.clear();
+                    rotulosApimenton.clear();
 
                 } else if (op < 1 || op > 4) {
                     System.out.println("Debe elegir uno de los numeros del menu");
