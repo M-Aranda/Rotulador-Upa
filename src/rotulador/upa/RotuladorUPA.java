@@ -15,7 +15,7 @@ public class RotuladorUPA {
 
     public static void main(String[] args) {
 
-        System.out.println("Bienvenido al menu de creacion de rotulos Upa,");
+        System.out.println("Bienvenido al menu de creacion de rotulos Upa");
         Menu m = new Menu();
 
         Scanner s = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class RotuladorUPA {
                     System.out.println("Gracias por usar el software");
                     break;
                 } else if (op == 1) {
-                    System.out.println("Crea rotulo de ingrediente de food");
+                    System.out.println("Crea rotulo de ingrediente de food (se usara hora actual del PC)");
 
                     int cant_ing = 0;
 
@@ -41,51 +41,51 @@ public class RotuladorUPA {
 //                    String fE = s.nextLine();
                     int ele;
 
-                    System.out.println("Usar hora actual?");
-                    while (true) {
-                        try {
 
-                            System.out.println("1. Si");
-                            System.out.println("2. No");
-
-                            ele = Integer.parseInt(s.nextLine());
-                            if (ele == 1 || ele == 2) {
-                                break;
-                            } else if (ele != 1 && ele != 2) {
-                                System.out.println("Debe elegir 1 o 2");
-                            }
-
-                        } catch (Exception e) {
-                            System.out.println("Eso no es valido.");
-                        }
-                    }
-
-                    int hEN = 0;
-
-                    while (true) {
-
-                        try {
-                            if (ele == 2) {
-                                System.out.print("Ingrese hora de elaboracion: ");
-                                hEN = Integer.parseInt(s.nextLine());
-
-                                if (hEN <= 2359 && hEN >= 0000) {
-                                    System.out.println("Generacion manual de hora, seleccionada. Habra una diferencia de 5 minutos entre rotulo.");
-                                    break;
-                                } else {
-                                    System.out.println("El numero debe ser igual or mayor que 0000 y menor a 2400");
-                                }
-
-                            } else if (ele == 1) {
-                                System.out.println("Se generaran rotulos con una diferencia de 5 minutos entre si a partir de la hora de la creacion.");
-                                break;
-                            }
-
-                        } catch (Exception e) {
-                            System.out.println("Eso no es valido(Ingrese numero entero de 4 digitos, ej: la una de la madrugada"
-                                    + "es 0100.)");
-                        }
-                    }
+//                    while (true) {
+//                        try {
+//
+//                            System.out.println("1. Si");
+//                            System.out.println("2. No");
+//
+//                            ele = Integer.parseInt(s.nextLine());
+//                            if (ele == 1 || ele == 2) {
+//                                break;
+//                            } else if (ele != 1 && ele != 2) {
+//                                System.out.println("Debe elegir 1 o 2");
+//                            }
+//
+//                        } catch (Exception e) {
+//                            System.out.println("Eso no es valido.");
+//                        }
+//                    }
+//
+//                    int hEN = 0;
+//
+//                    while (true) {
+//
+//                        try {
+//                            if (ele == 2) {
+//                                System.out.print("Ingrese hora de elaboracion: ");
+//                                hEN = Integer.parseInt(s.nextLine());
+//
+//                                if (hEN <= 2359 && hEN >= 0000) {
+//                                    System.out.println("Generacion manual de hora, seleccionada. Habra una diferencia de 5 minutos entre rotulo.");
+//                                    break;
+//                                } else {
+//                                    System.out.println("El numero debe ser igual or mayor que 0000 y menor a 2400");
+//                                }
+//
+//                            } else if (ele == 1) {
+//                                System.out.println("Se generaran rotulos con una diferencia de 5 minutos entre si a partir de la hora de la creacion.");
+//                                break;
+//                            }
+//
+//                        } catch (Exception e) {
+//                            System.out.println("Eso no es valido(Ingrese numero entero de 4 digitos, ej: la una de la madrugada"
+//                                    + "es 0100.)");
+//                        }
+//                    }
 
                     System.out.print("Ingrese responsable de elaboracion: ");
                     String res = s.nextLine();
@@ -139,7 +139,7 @@ public class RotuladorUPA {
 
                         minutosaAgregar += 5;
 
-                        hEN += 5;
+//                        hEN += 5;
 
                         cant_ing++;
                         if (cant_ing == 21) {
@@ -347,9 +347,15 @@ public class RotuladorUPA {
                     rotulosApalta.clear();
                     rotulosApimenton.clear();
 
-                } else if (op < 1 || op > 4) {
-                    System.out.println("Debe elegir uno de los numeros del menu");
+                }else if(op==5){
+                    Detalles_del_software detalles=new Detalles_del_software();
+                    detalles.Mostrar_info_de_software();
                 }
+                
+                
+                else if (op < 1 || op > 5) {
+                    System.out.println("Debe elegir uno de los numeros del menu");
+                } 
 
             } catch (Exception e) {
                 System.out.println("Eso no es valido");
